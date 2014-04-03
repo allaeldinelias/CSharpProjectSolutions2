@@ -1,0 +1,40 @@
+﻿@{
+    try{
+        var sImagePath = "";
+        if(IsPost)
+        {
+            WebImage image = WebImage.GetImageFromRequest();
+            if (image != null)
+            {
+                // save image to uploads directory
+                String sPath = Path.GetFileName(image.FileName);
+                sImagePath = "uploads/" + sPath;
+                image.Save(sImagePath);
+            }
+            else if(Request["imageurl"] != null)
+            {
+                sImagePath = Request["imageurl"];
+            }
+
+            var bImageOnly = Request["bImageOnly"];
+            if(bImageOnly == "false")
+            {
+                // save other fields to database
+                var sTitle = Request["title"];
+                var sSummary = Request["summary"];
+                var sDescription = Request["description"];
+                DateTime dNow = DateTime.Now;
+                Database.Open("Blog")
+                    .Execute("INSERT INTO Posts(title, summary, description, pubdate, imageurl) VALUES(@0, @1, @2, @3, @4)",
+                    sTitle, sSummary, sDescription, dNow, sImagePath);
+            }
+            Response.Write("{\"result\":\"success\"," + 
+                "\"imageurl\":\"" + sImagePath + "\"" +
+            "}");
+        }else{
+            throw new Exception("This is not a post");
+        }
+    }catch(Exception e){
+        Response.Write("{\"result\":\"exception: " + e.ToString() +  "\"}");
+    }
+}

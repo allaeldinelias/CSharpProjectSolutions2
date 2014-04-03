@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Post a new blog Entry</title>
+</head>
+<body>
+    <h1>Post a new blog Entry</h1>
+    <form id="uploadForm" method="post" action="upload.cshtml" enctype="multipart/form-data">
+        <div id="dropTarget">
+            <img id="placeholder" src="images/drop-target.png" />
+        </div>
+        <div>
+            <input type="file" name="fileToUpload" />
+        </div>
+        <p>
+            <label for="title">Title:</label><br />
+            <input id="title" type="text" name="title" />
+        </p>
+        <p>
+            <label for="summary">Summary:</label><br />
+            <input type="text" name="summary" />
+        </p>
+        <p>
+            <label for="description">Description:</label><br />
+            <textarea name="description" rows="10" cols="80"></textarea>
+        </p>
+        <div id="results" style="color:red"></div>
+        <button type="submit">Post</button>
+    </form>
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/js-toolbox.js"></script>
+    <script src="js/upload.js"></script>
+</body>
+</html>

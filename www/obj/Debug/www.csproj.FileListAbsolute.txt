@@ -1,0 +1,5 @@
+E:\C#Projects\ImageUpload\www\bin\www.dll
+E:\C#Projects\ImageUpload\www\bin\www.pdb
+E:\C#Projects\ImageUpload\www\obj\Debug\www.csprojResolveAssemblyReference.cache
+E:\C#Projects\ImageUpload\www\obj\Debug\www.dll
+E:\C#Projects\ImageUpload\www\obj\Debug\www.pdb
