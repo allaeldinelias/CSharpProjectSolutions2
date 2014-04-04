@@ -61,11 +61,20 @@
     <Content Include="App_Data\Blog_log.ldf">
       <DependentUpon>Blog.mdf</DependentUpon>
     </Content>
+    <Content Include="css\bootstrap-theme.css" />
+    <Content Include="css\bootstrap-theme.min.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\main.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="images\drop-target.png" />
     <Content Include="index.html" />
+    <Content Include="js\bootstrap.js" />
+    <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery-1.11.0.min.js" />
     <Content Include="js\js-toolbox.js" />
-    <Content Include="js\upload.js" />
+    <Content Include="js\blog.js" />
+    <Content Include="js\underscore-min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +82,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="upload.cshtml" />
+    <Content Include="showPosts20140404.cshtml" />
+    <Content Include="showPosts.cshtml" />
+    <Content Include="css\bootstrap-theme.css.map" />
+    <Content Include="css\bootstrap.css.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

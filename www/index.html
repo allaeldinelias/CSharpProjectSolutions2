@@ -1,34 +1,67 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Post a new blog Entry</title>
+    <title>Lean QA - by Rich Hildred and Friends</title>
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
 </head>
 <body>
-    <h1>Post a new blog Entry</h1>
-    <form id="uploadForm" method="post" action="upload.cshtml" enctype="multipart/form-data">
-        <div id="dropTarget">
-            <img id="placeholder" src="images/drop-target.png" />
+    <div class="container">
+        <form class="pull-right">
+            <input type="text" placeholder="search term" name="q" />
+            <button type="submit">Search</button>
+            <button id="addPost">Add Post</button>
+        </form>
+        <h1>Lean QA - by Rich Hildred and Friends</h1>
+        <form id="uploadForm" method="post" action="upload.cshtml" enctype="multipart/form-data">
+            <script id="uploadFormTemplate" type="text/template">
+                <h2>Post a new blog Entry</h2>
+                <div id="dropTarget">
+                    <img id="placeholder" src="images/drop-target.png" />
+                </div>
+                <div>
+                    <input type="file" name="fileToUpload" />
+                </div>
+                <p>
+                    <label for="title">Title:</label><br />
+                    <input id="title" type="text" name="title" />
+                </p>
+                <p>
+                    <label for="summary">Summary:</label><br />
+                    <input type="text" name="summary" />
+                </p>
+                <p>
+                    <label for="description">Description:</label><br />
+                    <textarea name="description" rows="10" cols="80"></textarea>
+                </p>
+                <div id="results" style="color: red"></div>
+                <button type="submit">Post</button>
+                <hr />
+            </script>
+        </form>
+        <div id="entries">
+            <script id="postTemplate" type="text/template">
+                <div>
+                    <img class="pull-right" src="<%= imageurl %>" />
+                    <h2><%= title %></h2>
+                    <div class="row">
+                        <div class="col-xs-6"><%= author %></div>
+                        <div class="pull-right"><%= pubdate %></div>
+                    </div>
+                    <div class="well"><%= summary %></div>
+                    <div><%= description %></div>
+                </div>
+            </script>
         </div>
-        <div>
-            <input type="file" name="fileToUpload" />
-        </div>
-        <p>
-            <label for="title">Title:</label><br />
-            <input id="title" type="text" name="title" />
-        </p>
-        <p>
-            <label for="summary">Summary:</label><br />
-            <input type="text" name="summary" />
-        </p>
-        <p>
-            <label for="description">Description:</label><br />
-            <textarea name="description" rows="10" cols="80"></textarea>
-        </p>
-        <div id="results" style="color:red"></div>
-        <button type="submit">Post</button>
-    </form>
+        <hr />
+        &copy; Rich Hildred
+        <script>document.write(new Date().getFullYear())</script>
+    </div>
     <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/underscore-min.js"></script>
     <script src="js/js-toolbox.js"></script>
-    <script src="js/upload.js"></script>
+    <script src="js/blog.js"></script>
 </body>
 </html>

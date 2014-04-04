@@ -1,14 +1,36 @@
 ﻿jQuery(document).ready(function () {
     jQuery.event.props.push("dataTransfer");
-    new Upload();
+    new Blog();
 });
 
-var Upload = Toolbox.Base.extend({
+var Blog = Toolbox.Base.extend({
     constructor: function () {
+        jQuery("#addPost").click(jQuery.proxy(this.addPost, this));
+        this.getPosts();
+    },
+
+    fAddPostForm: _.template(jQuery("#uploadFormTemplate").html()),
+    addPost: function () {
+        jQuery("#uploadForm").html(this.fAddPostForm());
         jQuery("#uploadForm").submit(jQuery.proxy(this.uploadForm, this));
         jQuery("#dropTarget").bind("dragover", jQuery.proxy(this.dragOver, this));
         jQuery("body").bind("dragover", jQuery.proxy(this.dragOverBody, this));
         jQuery("#dropTarget").bind("drop", jQuery.proxy(this.drop, this));
+        return false;
+    },
+
+    fPostForm: _.template(jQuery("#postTemplate").html()),
+
+    getPosts: function () {
+        jQuery.ajax({url: "showPosts.cshtml", dataType:"json"}).done(jQuery.proxy(this.displayPosts, this)).
+        fail(jQuery.proxy(this.errorReturn, this));
+    },
+
+    displayPosts: function (aPosts) {
+        jQuery("#entries").html("");
+        for (var n = 0; n < aPosts.length; n++) {
+            jQuery("#entries").append(this.fPostForm(aPosts[n]));
+        }
     },
 
     sImageUrl: null,
