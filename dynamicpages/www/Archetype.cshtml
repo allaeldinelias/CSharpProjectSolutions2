@@ -1,0 +1,25 @@
+﻿@using www
+@{
+    Response.ContentType = "application/json";
+    if(IsPost)
+    {
+        string jsonData = new StreamReader(HttpContext.Current.Request.InputStream).ReadToEnd();
+        Archetype oArchetype = new Archetype(jsonData);
+        oArchetype.save();
+        Response.Write("{\"success\":\"archetype added\"}");
+    }
+    else
+    {
+        String sArchetype = Request["archetype"];
+        if(sArchetype != null)
+        {
+            string[] aParams = { sArchetype };
+            Response.Write(SQL2JSON.toJSON("SELECT * FROM DispAttribute WHERE idDispClass IN (SELECT idDispClass FROM DispClass WHERE name = @col0) ",
+                aParams));
+        }
+        else
+        {
+            Response.Write(SQL2JSON.toJSON("SELECT * FROM DispClass"));
+        }
+    }
+}

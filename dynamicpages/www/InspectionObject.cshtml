@@ -1,0 +1,23 @@
+﻿@using www
+@{
+    Response.ContentType = "application/json";
+    if(IsPost)
+    {
+        string jsonData = new StreamReader(HttpContext.Current.Request.InputStream).ReadToEnd();
+        InspectionObject oInspection = new InspectionObject(jsonData);
+        oInspection.save();
+        Response.Write("{\"success\":\"object added\"}");
+    }
+    else
+    {
+        String sArchetype = Request["archetype"];
+        if(sArchetype == null || !SourceVersion.isName(sArchetype))
+        {
+            Response.Write("{\"error\":\"Invalid Archetype\"}");
+        }
+        else
+        {
+            Response.Write(SQL2JSON.toJSON("SELECT * FROM " + sArchetype));
+        }
+    }
+}
