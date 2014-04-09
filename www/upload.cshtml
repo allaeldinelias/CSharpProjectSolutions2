@@ -1,4 +1,5 @@
-﻿@{
+﻿@using CloudinaryDotNet;
+@{
     try{
         var sImagePath = "";
         if(IsPost)
@@ -8,8 +9,27 @@
             {
                 // save image to uploads directory
                 String sPath = Path.GetFileName(image.FileName);
-                sImagePath = "uploads/" + sPath;
+                sImagePath = Request.PhysicalApplicationPath + "App_Data/" + sPath;
+                image.Resize(width: 320, height: 320, preserveAspectRatio: true, preventEnlarge: true);
+                image.AddTextWatermark("Rich was here!", fontColor: "Black", fontFamily: "Arial", opacity: 90);
+
                 image.Save(sImagePath);
+
+                // now we will add it to cloudinary
+                Cloudinary cloudinary = new Cloudinary("cloudinary://283344254821121:INXwnv9AJtOP9PUdmR-xxVa2DTk@hfm9olpom");
+                CloudinaryDotNet.Actions.ImageUploadParams uploadParams = new CloudinaryDotNet.Actions.ImageUploadParams()
+                {
+                    File = new CloudinaryDotNet.Actions.FileDescription(sImagePath)
+                };
+
+                CloudinaryDotNet.Actions.ImageUploadResult uploadResult = cloudinary.Upload(uploadParams);
+                string url = cloudinary.Api.UrlImgUp.BuildUrl(String.Format("{0}.{1}", uploadResult.PublicId, uploadResult.Format));
+                File.Delete(sImagePath);
+                sImagePath = url;
+
+                
+                
+                
             }
             else if(Request["imageurl"] != null)
             {
