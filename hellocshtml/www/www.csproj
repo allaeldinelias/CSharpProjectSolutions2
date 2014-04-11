@@ -78,6 +78,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="index.cshtml" />
+    <Content Include="add2Numbers.cshtml" />
+    <Content Include="Add2NumbersAjax.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
